@@ -17,8 +17,6 @@ BnbMap = React.createClass({
 			return;
 		} else { 
 		this.state.benches.forEach(function(bench){
-			console.log(bench.lat);
-			console.log(map);
 			new google.maps.Marker({
 				position: {lat: bench.lat, lng: bench.lng},
 				map: that.map
@@ -38,6 +36,17 @@ BnbMap = React.createClass({
 		};
 
 		this.map = new google.maps.Map(map, mapOptions);
+		this.map.addListener('idle', function(){ 
+			var pos = this.map.getBounds();
+			var north = pos.getNorthEast().J;
+			var east = pos.getNorthEast().M;
+			var south = pos.getSouthWest().J;
+			var west = pos.getSouthWest().M;
+			var params = {bounds: {north: north, east: east, west: west, south: south}};
+
+			ApiUtil.fetchBenches(params);
+	
+		}.bind(this));
 	},
 
 
@@ -47,6 +56,8 @@ BnbMap = React.createClass({
 		)
 	}
 })
+
+
 
 
 

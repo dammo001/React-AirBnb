@@ -9,9 +9,22 @@
 		_benches = benches;
 	};
 
+
+
 	root.BenchStore = $.extend({}, EventEmitter.prototype, { 
 		all: function(){ 
 			return _benches.slice(); 
+		},
+
+		allInBounds: function(bounds){ 
+			var boundedBenches = []; 
+			_benches.forEach(function(bench){ 
+				if ((bounds.west <= bench.lng) && (bench.lng <= bounds.east) &&
+					(bounds.south <= bench.lat) && (bench.lat <= bounds.north)){
+						boundedBenches.push(bench);
+					}
+			})
+			return boundedBenches; 
 		},
 
 		//callback is NOT invoked at the listener level, or it would return the value 

@@ -7,7 +7,6 @@ BenchIndex = React.createClass({
 	},
 
 	componentDidMount: function(){ 
-		ApiUtil.fetchBenches();
 		this.storeChanged();
 	},
 
@@ -16,7 +15,7 @@ BenchIndex = React.createClass({
 	},
 
 	setBenches: function(){
-		this.setState({ benches: BenchStore.all() });
+		this.setState({ benches: BenchStore.all()});
 	},
 
 	render: function() { 
