@@ -16,16 +16,6 @@
 			return _benches.slice(); 
 		},
 
-		allInBounds: function(bounds){ 
-			var boundedBenches = []; 
-			_benches.forEach(function(bench){ 
-				if ((bounds.west <= bench.lng) && (bench.lng <= bounds.east) &&
-					(bounds.south <= bench.lat) && (bench.lat <= bounds.north)){
-						boundedBenches.push(bench);
-					}
-			})
-			return boundedBenches; 
-		},
 
 		//callback is NOT invoked at the listener level, or it would return the value 
 		addChangeListener: function(callback){ 
@@ -42,10 +32,17 @@
 //AppDispatcher is run as a side effect of defining dispatcherID rather than run on its own 
 	 	dispatcherID:
 	 		AppDispatcher.register(function(payload) {
-	 			if(payload.actionType === BenchConstants.BENCHES_RECEIVED){ 
-	 				setBenches(payload.benches);
-	 				BenchStore.change(CHANGE);
-	 			}})
+	 			switch(payload.actionType){
+	 				case BenchConstants.BENCHES_RECEIVED:
+	 					setBenches(payload.benches);
+	 					BenchStore.change(CHANGE);
+	 					break;
+
+	 				case BenchConstants.BENCH_CREATED:
+	 					BenchStore.change(CHANGE);
+	 					break;	
+	 			}
+	 		})
 	 });
 
 
