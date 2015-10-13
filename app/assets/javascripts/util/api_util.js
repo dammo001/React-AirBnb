@@ -3,9 +3,8 @@ ApiUtil = {
 		$.ajax({
 			url: "/api/benches",
 			type: "GET",
-			data: params,
+			data: {bounds: params},
 			success: function(benches) {
-				console.log(params);
 				ApiActions.receiveBenches(benches);
 			}
 		});
@@ -17,7 +16,6 @@ ApiUtil = {
 			type: "POST",
 			data: params,
 			success: function(bench){
-				console.log(bench);
 				ApiActions.createBench(bench);
 			}
 		});
