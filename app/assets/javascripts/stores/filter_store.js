@@ -43,10 +43,10 @@
 					break; 
 
 					case BenchConstants.UPDATE_SEATS:
+					console.log(payload.params.minSeat);
+					console.log(payload.params.maxSeat);
 					FilterStore.filter.minSeat = parseInt(payload.params.minSeat);
 					FilterStore.filter.maxSeat = parseInt(payload.params.maxSeat);
-					console.log(FilterStore.filter.minSeat)
-					console.log(FilterStore.filter.maxSeat);
 					FilterStore.change(CHANGE);
 					break; 
 				}

@@ -8,13 +8,17 @@ FilterParams = React.createClass({
 
 
 	changeMin: function(event){
-		this.setState({minSeat: event.target.value}, FilterActions.updateSeats.bind(null, this.state));
-		// FilterActions.updateSeats(this.state);
+		this.setState({minSeat: event.target.value});
+		FilterActions.updateSeats({minSeat: event.target.value, maxSeat: this.state.maxSeat});
 	},
 
+	// componentDidUpdate: function(){
+	// 	FilterActions.updateSeats(this.state);
+	// },
+
 	changeMax: function(event){
-		this.setState({maxSeat: event.target.value}, FilterActions.updateSeats.bind(null, this.state));
-		// FilterActions.updateSeats();
+		this.setState({maxSeat: event.target.value});
+		FilterActions.updateSeats({maxSeat: event.target.value, minSeat: this.state.minSeat});
 	},
 
 	render: function(){ 
